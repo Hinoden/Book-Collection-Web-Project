@@ -18,6 +18,8 @@ function Login(props) {
     const [success, setSuccess] = useState(false);      //usually replace this with react navigator
     const [loginStatus, setLoginStatus] = useState("");
 
+    axios.defaults.withCredentials = true;
+
     useEffect(() => {
         userRef.current.focus();
     }, [])
@@ -34,10 +36,18 @@ function Login(props) {
             if (response.data.message){
                 setLoginStatus(response.data.message);
             } else {
-                setLoginStatus(response.data[0].fullName);
+                setLoginStatus(response.data[0].username);
             }
         });
     };
+    
+    useEffect(() => {
+        axios.get(LOGIN_URL).then((response) => {
+            if (response.data.loggedIn == true){
+                setLoginStatus(response.data.user[0].username);
+            }
+        });
+    }, []);
 
     return (
         <div className="loginContainer">
