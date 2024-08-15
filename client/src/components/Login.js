@@ -16,7 +16,7 @@ function Login(props) {
     const [password, setPassword] = useState("");
     const [errMsg, setErrMsg] = useState("");
     const [success, setSuccess] = useState(false);      //usually replace this with react navigator
-    const [loginStatus, setLoginStatus] = useState("");
+    const [loginStatus, setLoginStatus] = useState(false);
 
     axios.defaults.withCredentials = true;
 
@@ -33,21 +33,24 @@ function Login(props) {
             username: username,
             password: password,
         }). then((response) => {
-            if (response.data.message){
-                setLoginStatus(response.data.message);
+            if (!response.data.auth){
+                setLoginStatus(false);
             } else {
-                setLoginStatus(response.data[0].username);
+                localStorage.setItem("token", response.data.token);
+                setLoginStatus(true);
             }
         });
     };
-    
-    useEffect(() => {
-        axios.get(LOGIN_URL).then((response) => {
-            if (response.data.loggedIn == true){
-                setLoginStatus(response.data.user[0].username);
-            }
+
+    const userAuthenticated = () => {
+        axios.get("http://localhost:3500/isUserAuth", {
+            headers: {
+                "x-access-token": localStorage.getItem("token"),
+            },
+        }).then((response) => {
+            console.log(response);
         });
-    }, []);
+    };
 
     return (
         <div className="loginContainer">
@@ -80,7 +83,10 @@ function Login(props) {
                 <Button variant="contained" onClick={login}>Login</Button>
             </div>
             <Button onClick={() => props.onFormSwitch('register')} className = "registerButton" variant="text">Don't have an account? Register here.</Button>
-            <h1 className="status">{loginStatus}</h1>
+            {loginStatus && (
+                <Button variant="contained" onClick={userAuthenticated}>Check If Authenticated</Button>
+            )}
+            {/* <h1 className="status">{loginStatus}</h1> */}
         </div>
     );
 }
