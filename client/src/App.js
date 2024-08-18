@@ -6,7 +6,8 @@ import './App.css';
 
 function App() {
   const [myBool, setmyBool] = useState(true);
-  const [currentForm, setCurrentForm] = useState('login')
+  const [currentForm, setCurrentForm] = useState('login');
+  const [auth, setAuth] = useState(false);
 
   const toggleForm = (formName) => {
     setCurrentForm(formName);
@@ -17,14 +18,20 @@ function App() {
   }
   return (
     <div className="App">
+      {auth ? (
+        <h>Please</h>
+      ) : (
+        <>
       {myBool ? (
         <Welcome toggleBool={toggleBool} />
       ) : (
         currentForm === "login" ? (
-          <Login onFormSwitch={toggleForm} />
+          <Login onFormSwitch={toggleForm} setAuth={setAuth}/>
         ) : (
           <SignUp onFormSwitch={toggleForm} />
         )
+      )}
+      </>
       )}
     </div>
   );
