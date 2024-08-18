@@ -8,15 +8,14 @@ import axios from '../api/axios';
 const LOGIN_URL = 'http://localhost:3500/login';
 
 function Login(props) {
-    const {setAuth} = useContext(AuthContext);
     const userRef = useRef();
     const errRef = useRef();
 
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [errMsg, setErrMsg] = useState("");
-    const [success, setSuccess] = useState(false);      //usually replace this with react navigator
     const [loginStatus, setLoginStatus] = useState(false);
+    const [loginMSG, setLoginMSG] = useState("");
 
     axios.defaults.withCredentials = true;
 
@@ -35,9 +34,12 @@ function Login(props) {
         }). then((response) => {
             if (!response.data.auth){
                 setLoginStatus(false);
+                setLoginMSG(response.data.message);
+                props.setAuth(false);
             } else {
                 localStorage.setItem("token", response.data.token);
                 setLoginStatus(true);
+                props.setAuth(true);
             }
         });
     };
@@ -83,10 +85,10 @@ function Login(props) {
                 <Button variant="contained" onClick={login}>Login</Button>
             </div>
             <Button onClick={() => props.onFormSwitch('register')} className = "registerButton" variant="text">Don't have an account? Register here.</Button>
-            {loginStatus && (
+            {/* {loginStatus && (
                 <Button variant="contained" onClick={userAuthenticated}>Check If Authenticated</Button>
-            )}
-            {/* <h1 className="status">{loginStatus}</h1> */}
+            )} */}
+            <h1 className="status">{loginMSG}</h1>
         </div>
     );
 }
