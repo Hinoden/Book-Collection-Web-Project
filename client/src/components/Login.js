@@ -1,5 +1,4 @@
-import React, {useRef, useState, useEffect, useContext} from "react";
-import AuthContext from "../context/AuthProvider";
+import React, {useRef, useState, useEffect} from "react";
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import './Login.css';
@@ -38,21 +37,23 @@ function Login(props) {
                 props.setAuth(false);
             } else {
                 localStorage.setItem("token", response.data.token);
+                localStorage.setItem("username", response.data.username);
+                localStorage.setItem("auth", "true");
                 setLoginStatus(true);
                 props.setAuth(true);
             }
         });
     };
 
-    const userAuthenticated = () => {
-        axios.get("http://localhost:3500/isUserAuth", {
-            headers: {
-                "x-access-token": localStorage.getItem("token"),
-            },
-        }).then((response) => {
-            console.log(response);
-        });
-    };
+    // const userAuthenticated = () => {
+    //     axios.get("http://localhost:3500/isUserAuth", {
+    //         headers: {
+    //             "x-access-token": localStorage.getItem("token"),
+    //         },
+    //     }).then((response) => {
+    //         console.log(response);
+    //     });
+    // };
 
     return (
         <div className="loginContainer">

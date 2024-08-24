@@ -1,10 +1,10 @@
-import {useState} from "react";
-import Button from '@mui/material/Button';
+import {useState, useEffect} from "react";
 import Welcome from "./components/Greeting.js";
 import Login from "./components/Login.js";
 import SignUp from "./components/SignUp.js";
+import Navbar from "./components/Navbar.js";
+import Home from "./components/Home.js";
 import './App.css';
-import axios from "./api/axios.js";
 
 function App() {
   const [myBool, setmyBool] = useState(true);
@@ -19,23 +19,24 @@ function App() {
     setmyBool(!myBool);
   }
 
-  const logOut = () => {
-    axios.post("http://localhost:3500/logout")
-    .then(response => {
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    const authStatus = localStorage.getItem("auth");
+    
+    if (token && authStatus === "true") {
+      setAuth(true);
+    } else {
       setAuth(false);
-      localStorage.removeItem("token");
-      setCurrentForm('login');
-      console.log(response.data.message);
-    })
-    .catch(error => {
-      console.error("There was an error logging out!", error);
-    })
-  }
+    }
+  }, []);
 
   return (
     <div className="App">
       {auth ? (
-        <Button variant="contained" onClick={logOut}>Log Out</Button>
+        <>
+          <Navbar/>
+          <Home/>
+        </>
       ) : (
         <>
       {myBool ? (
