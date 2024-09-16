@@ -1,11 +1,16 @@
-import {useState, useEffect} from "react";
+import {useState, useEffect, useRef} from "react";
 import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
 import axios from "../api/axios.js";
 import {FaSearch} from "react-icons/fa";
+import {useNavigate} from 'react-router-dom';
+import {useGlobalContext} from "./Context..js";
 import './Navbar.css';
 
 function Navbar({username}) {
+    const {setSearchTerm, setResultTitle} = useGlobalContext();
+    const searchText = useRef(null);
+    // const searchText = useRef('');
+    const navigate = useNavigate(); 
     const [currentForm, setCurrentForm] = useState('login');
     const [auth, setAuth] = useState(false);
 
@@ -28,6 +33,37 @@ function Navbar({username}) {
           console.error("There was an error logging out!", error);
         })
       }
+
+      useEffect(() => searchText.current.focus(), []);
+
+      const handleSubmit = (e) => {
+        e.preventDefault();
+        if (searchText.current) {  // Check if the ref is not null
+            const tempSearchTerm = searchText.current.value.trim();  // Access the value
+            if (tempSearchTerm.replace(/[^\w\s]/gi, "").length === 0) {
+                setSearchTerm("the lost world");
+                setResultTitle("Please Enter Something...");
+            } else {
+                setSearchTerm(tempSearchTerm);
+            }
+            navigate("/book");
+        } else {
+            console.log("Ref is null");
+        }
+    };
+    
+      // const handleSubmit = (e) => {
+      //   e.preventDefault();
+      //   let tempSearchTerm = searchText.current.value.trim();
+      //   if ((tempSearchTerm.replace(/[^\w\s]/gi,"")).length === 0){
+      //     setSearchTerm("the lost world");
+      //     setResultTitle("Please Enter Something...");
+      //   } else {
+      //     setSearchTerm(searchText.current.value);
+      //   }
+
+      //   navigate("/book");
+      // };
     
       useEffect(() => {
         const token = localStorage.getItem("token");
@@ -39,13 +75,13 @@ function Navbar({username}) {
           setAuth(false);
         }
       }, []);
+
     const useRname = localStorage.getItem("username");
-    console.log(useRname);
 
     return (
         <div id = "Navbar">
-            <input type="text" className="search" placeholder="Harry Potter and the..." autoComplete="off"></input>
-            <Button variant="contained" id="searchButton">
+            <input type="text" className="search" placeholder="Harry Potter and the..." ref = {searchText} autoComplete="off"></input>
+            <Button variant="contained" id="searchButton" onClick={handleSubmit}>
               <FaSearch size={20}/>
             </Button>
             <Button variant="contained" id="logOut" onClick={logOut}>Log Out</Button>

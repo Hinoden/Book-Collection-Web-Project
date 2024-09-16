@@ -1,9 +1,11 @@
 import {useState, useEffect} from "react";
+import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import Welcome from "./components/Greeting.js";
 import Login from "./components/Login.js";
 import SignUp from "./components/SignUp.js";
-import Navbar from "./components/Navbar.js";
 import Home from "./components/Home.js";
+import BookList from "./components/BookList.js";
+import {AppProvider} from "./components/Context..js";
 import './App.css';
 
 function App() {
@@ -31,12 +33,16 @@ function App() {
   }, []);
 
   return (
+    <AppProvider>
     <div className="App">
       {auth ? (
-        <>
-          <Navbar/>
-          <Home/>
-        </>
+          <BrowserRouter>
+            <Routes>
+                <Route path="/" element={<Home/>}>
+                  <Route path="/book" element={<BookList />} />
+                </Route>
+            </Routes>
+          </BrowserRouter>
       ) : (
         <>
       {myBool ? (
@@ -51,6 +57,7 @@ function App() {
       </>
       )}
     </div>
+    </AppProvider>
   );
 }
 
