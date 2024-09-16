@@ -1,0 +1,31 @@
+#logOut{
+    position: absolute;
+    top: 5%;
+    left: 90%;
+}
+
+#welcome{
+    position: absolute;
+    top: 5%;
+    left: 78%;
+    font-weight: bold;
+}
+
+.search{
+    position: absolute;
+    top: 8%;
+    left: 45%;
+    transform: translate(-50%, -50%);
+    height: 2.5%;
+    width: 40%;
+    border-radius: 16px;
+}
+
+#searchButton{
+    position: absolute;
+    top: 8%;
+    left: 68%;
+    transform: translate(-50%, -50%);
+    border-radius: 16px;
+    height: 3.5%;
+}

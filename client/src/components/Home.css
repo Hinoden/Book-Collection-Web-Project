@@ -1,0 +1,14 @@
+.header{
+    background-color: white;
+    position: absolute;
+    top: 25%;
+    left: 50%;
+    width: 100%;
+    transform: translate(-50%, -50%);
+}
+
+#description{
+    margin-left: 10%;
+    margin-right: 10%;
+}
+

@@ -6,7 +6,7 @@ import './Greeting.css';
 function Welcome(props) {
     return (
         <div className = "welcomeContainer">
-            <div className = "header">
+            <div className = "headerWelcome">
                 <div className = "title">Welcome!</div>
             </div>
             <div className = "middle">

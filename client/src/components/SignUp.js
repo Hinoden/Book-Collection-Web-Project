@@ -37,15 +37,15 @@ function SignUp(props) {
 
     useEffect(() => {       //used to validate the username
         const result = USER_REGEX.test(username);
-        console.log(result);
-        console.log(username);
+        // console.log(result);
+        // console.log(username);
         setValidName(result);
     }, [username])
 
     useEffect(() => {       //used to test the password
         const result = PWD_REGEX.test(password);
-        console.log(result);
-        console.log(password);
+        // console.log(result);
+        // console.log(password);
         setValidPassword(result);
         const match = password ===matchPassword;
         setValidMatch(match);
