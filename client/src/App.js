@@ -5,6 +5,7 @@ import Login from "./components/Login.js";
 import SignUp from "./components/SignUp.js";
 import Home from "./components/Home.js";
 import BookList from "./components/BookList.js";
+import BookDetails from "./components/BookDetails.js";
 import {AppProvider} from "./components/Context..js";
 import './App.css';
 
@@ -40,6 +41,7 @@ function App() {
             <Routes>
                 <Route path="/" element={<Home/>}>
                   <Route path="/book" element={<BookList />} />
+                  <Route path="/book/:id" element={<BookDetails />} />
                 </Route>
             </Routes>
           </BrowserRouter>

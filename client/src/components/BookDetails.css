@@ -1,0 +1,26 @@
+.book_cover img{
+    width: 300px;
+    height: auto;
+    max-width: 100%;
+    padding-left: 300px;
+}
+
+.book_details {
+    display: flex;
+    align-items: flex-start; /* Align items at the top */
+    gap: 20px; /* Add spacing between the elements */
+    margin-top: 300px;
+    width: 100vw;
+}
+
+.book_info {
+    /* Additional styling for the text if needed */
+    flex: 1;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.book_title {
+    font-weight: bold;
+    font-size: 50px;
+}
