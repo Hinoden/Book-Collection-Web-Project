@@ -59,60 +59,41 @@ const BookDetails = () => {
                         <span>{book?.title}</span>
                     </div>
                     <div className="book_description">
+                        <span id = "bold">Description: </span>
                         <span>{book?.description}</span>
                     </div>
                     <div className="book_subject_places">
-                        <span>Subject Places: </span>
+                        <span id = "bold">Subject Places: </span>
                         <span>{book?.subject_places}</span>
                     </div>
                     <div className="book_subject_times">
-                        <span>Subject Times: </span>
+                        <span id = "bold">Subject Times: </span>
                         <span>{book?.subject_times}</span>
                     </div>
                     <div className="subjects">
-                        <span>Subjects: </span>
+                        <span id = "bold">Subjects: </span>
                         <span>{book?.subject}</span>
                     </div>
+                    <div className="buttonContainer">
+                        <Button variant="outlined" className="generalButton">
+                            <span>Read</span>
+                        </Button>
+                        <Button variant="outlined" className="generalButton">
+                            <span>Currently Reading</span>
+                        </Button>
+                        <Button variant="outlined" className="generalButton">
+                            <span>Dropped</span>
+                        </Button>
+                        <Button variant="outlined" className="generalButton">
+                            <span>Wishlist</span>
+                        </Button>
+                    </div>
+                    <Button variant="contained" className="backButton" onClick={() => navigate("/book")}>
+                        <span>Go Back</span>
+                    </Button>
                 </div>
             </div>
-            <Button variant="contained" className="backButton" onClick={() => navigate("/book")}>
-                    <span>Go Back</span>
-            </Button>
         </section>
-
-
-        // <section className="bookDetails">
-        //     <div>
-                // <Button variant="contained" className="backButton" onClick={() => navigate("/book")}>
-                //     <span>Go Back</span>
-                // </Button>
-        //         <div>
-        //             <div className="book_cover">
-        //                 <img src={book?.cover_img} alt = "cover img" />
-        //             </div>
-        //             <div>
-        //                 <div>
-        //                     <span>{book?.title}</span>
-        //                 </div>
-        //                 <div>
-        //                     <span>{book?.description}</span>
-        //                 </div>
-        //                 <div>
-        //                     <span>Subject Places: </span>
-        //                     <span>{book?.subject_places}</span>
-        //                 </div>
-        //                 <div>
-        //                     <span>Subject Times: </span>
-        //                     <span>{book?.subject_times}</span>
-        //                 </div>
-        //                 <div>
-        //                     <span>Subjects: </span>
-        //                     <span>{book?.subjects}</span>
-        //                 </div>
-        //             </div>
-        //         </div>
-        //     </div>
-        // </section>
     )
 }
 
