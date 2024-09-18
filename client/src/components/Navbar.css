@@ -1,13 +1,16 @@
 #logOut{
     position: absolute;
-    top: 5%;
-    left: 90%;
+    top: 8%;
+    left: 92%;
+    transform: translate(-50%, -50%);
+    border-radius: 16px;
+    height: 3.5%;
 }
 
 #welcome{
     position: absolute;
     top: 5%;
-    left: 78%;
+    left: 7%;
     font-weight: bold;
 }
 
@@ -25,6 +28,15 @@
     position: absolute;
     top: 8%;
     left: 68%;
+    transform: translate(-50%, -50%);
+    border-radius: 16px;
+    height: 3.5%;
+}
+
+#homeButton{
+    position: absolute;
+    top: 8%;
+    left: 83%;
     transform: translate(-50%, -50%);
     border-radius: 16px;
     height: 3.5%;

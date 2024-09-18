@@ -80,6 +80,7 @@ function Navbar({username}) {
 
     return (
         <div id = "Navbar">
+            <Button variant="outlined" id="homeButton" onClick={() => navigate("/")}>Go Home</Button>
             <input type="text" className="search" placeholder="Harry Potter and the..." ref = {searchText} autoComplete="off"></input>
             <Button variant="contained" id="searchButton" onClick={handleSubmit}>
               <FaSearch size={20}/>
