@@ -9,6 +9,10 @@ const AppProvider = ({children}) => {
     const [books, setBooks] = useState([]);
     const [loading, setLoading] = useState(true);
     const [resultTitle, setResultTitle] = useState("");
+    const [currRead, setCurrRead] = useState([]);
+    const [read, setRead] = useState([]);
+    const [dropped, setDropped] = useState([]);
+    const [wishlisted, setWishlisted] = useState([]);
 
     const fetchBooks = useCallback(async() => {
         setLoading(true);
@@ -50,13 +54,69 @@ const AppProvider = ({children}) => {
         }
     }, [searchTerm]);
 
+    const addToCurrRead = (book) => {
+        const oldCurrRead = [...currRead];
+        const newCurrRead = oldCurrRead.concat(book);
+
+        setCurrRead(newCurrRead);
+    };
+
+    const removeFromCurrRead = (id) => {
+        const oldCurrRead = [...currRead];
+        const newCurrRead = oldCurrRead.filter((book) => book.id !== id);
+
+        setCurrRead(newCurrRead);
+    };
+
+    const addToRead = (book) => {
+        const oldRead = [...read];
+        const newRead = oldRead.concat(book);
+
+        setRead(newRead);
+    };
+
+    const removeFromRead = (id) => {
+        const oldRead = [...read];
+        const newRead = oldRead.filter((book) => book.id !== id);
+
+        setRead(newRead);
+    };
+
+    const addToDropped = (book) => {
+        const oldDroppedRead = [...dropped];
+        const newDroppedRead = oldDroppedRead.concat(book);
+
+        setDropped(newDroppedRead);
+    };
+
+    const removeFromDropped = (id) => {
+        const oldDroppedRead = [...dropped];
+        const newDroppedRead = oldDroppedRead.filter((book) => book.id !== id);
+
+        setDropped(newDroppedRead);
+    };
+
+    const addToWishlist = (book) => {
+        const oldWishlistRead = [...wishlisted];
+        const newWishlistRead = oldWishlistRead.concat(book);
+
+        setWishlisted(newWishlistRead);
+    };
+
+    const removeFromWishlist = (id) => {
+        const oldWishlistRead = [...wishlisted];
+        const newWishlistRead = oldWishlistRead.filter((book) => book.id !== id);
+
+        setWishlisted(newWishlistRead);
+    };
+
     useEffect(() => {
         fetchBooks();
     }, [searchTerm, fetchBooks]);
 
     return(
         <AppContext.Provider value = {{
-            loading, books, setSearchTerm, resultTitle, setResultTitle
+            currRead, addToCurrRead, removeFromCurrRead, read, addToRead, removeFromRead, dropped, addToDropped, removeFromDropped, wishlisted, addToWishlist, removeFromWishlist, loading, books, setSearchTerm, resultTitle, setResultTitle
         }}>
             {children}
         </AppContext.Provider>

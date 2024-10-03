@@ -1,0 +1,18 @@
+.buttonContainer{
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.myListContainer{
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(207, 230, 241);
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    width: 1300px;
+    border-radius: 10px;
+    margin-top: -280px;
+}

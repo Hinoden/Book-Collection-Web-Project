@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {useParams} from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import {useGlobalContext} from "./Context..js";
 import coverImg from "../cover_not_found.jpg";
 import Button from '@mui/material/Button';
 import './BookDetails.css';
@@ -8,10 +9,31 @@ import './BookDetails.css';
 const URL = "https://openlibrary.org/works/";
 
 const BookDetails = () => {
+    const {currRead, addToCurrRead, removeFromCurrRead, read, addToRead, removeFromRead, dropped, addToDropped, removeFromDropped, wishlisted, addToWishlist, removeFromWishlist} = useGlobalContext();
     const {id} = useParams();
     const [loading, setLoading] = useState(false);
     const [book, setBook] = useState(null);
     const navigate = useNavigate();
+
+    const currReadChecker = (id) => {
+        const booleanCurr = currRead.some((book) => book.id === id);
+        return booleanCurr;
+    }
+
+    const readChecker = (id) => {
+        const booleanRead = read.some((book) => book.id === id);
+        return booleanRead;
+    }
+
+    const droppedChecker = (id) => {
+        const booleanDropped = dropped.some((book) => book.id === id);
+        return booleanDropped;
+    }
+
+    const wishlistChecker = (id) => {
+        const booleanWishlist = wishlisted.some((book) => book.id === id);
+        return booleanWishlist;
+    }
 
     useEffect(() => {
         setLoading(true);
@@ -26,6 +48,7 @@ const BookDetails = () => {
                     const newBook = {
                         description: description ? description.value : "No description found",
                         title: title,
+                        id: id,
                         cover_img: covers ? `https://covers.openlibrary.org/b/id/${covers[0]}-L.jpg` : coverImg,
                         subject_places: subject_places ? subject_places.join(", ") : "No subject places found",
                         subject_times: subject_times ? subject_times.join(", ") : "No subject times found",
@@ -74,19 +97,49 @@ const BookDetails = () => {
                         <span id = "bold">Subjects: </span>
                         <span>{book?.subject}</span>
                     </div>
-                    <div className="buttonContainer">
-                        <Button variant="outlined" className="generalButton">
-                            <span>Read</span>
-                        </Button>
-                        <Button variant="outlined" className="generalButton">
-                            <span>Currently Reading</span>
-                        </Button>
-                        <Button variant="outlined" className="generalButton">
-                            <span>Dropped</span>
-                        </Button>
-                        <Button variant="outlined" className="generalButton">
-                            <span>Wishlist</span>
-                        </Button>
+                    <div className="buttonContainer1">
+                        {book && readChecker(book.id) ? (
+                            <Button variant="outlined" className="generalButton" onClick = {() => removeFromRead(book.id)}>
+                                <span>Remove Read</span>
+                            </Button>
+                        ) : (
+                            <Button variant="outlined" className="generalButton" onClick = {() => addToRead(book)}>
+                                <span>Read</span>
+                            </Button>
+                        )}
+                        {book && currReadChecker(book.id) ? (
+                            <Button variant="outlined" className="generalButton" onClick = {() => removeFromCurrRead(book.id)}>
+                                <span>Remove Currently Reading</span>
+                            </Button>
+                        ) : (
+                            book && (
+                                <Button variant="outlined" className="generalButton" onClick = {() => addToCurrRead(book)}>
+                                    <span>Currently Reading</span>
+                                </Button>
+                            )
+                        )}
+                        {book && droppedChecker(book.id) ? (
+                            <Button variant="outlined" className="generalButton" onClick = {() => removeFromDropped(book.id)}>
+                                <span>Remove Dropped</span>
+                            </Button>
+                        ) : (
+                            book && (
+                                <Button variant="outlined" className="generalButton" onClick = {() => addToDropped(book)}>
+                                    <span>Dropped</span>
+                                </Button>
+                            )
+                        )}
+                        {book && wishlistChecker(book.id) ? (
+                            <Button variant="outlined" className="generalButton" onClick = {() => removeFromWishlist(book.id)}>
+                                <span>Remove Wishlist</span>
+                            </Button>
+                        ) : (
+                            book && (
+                                <Button variant="outlined" className="generalButton" onClick = {() => addToWishlist(book)}>
+                                    <span>Wishlist</span>
+                                </Button>
+                            )
+                        )}
                     </div>
                     <Button variant="contained" className="backButton" onClick={() => navigate("/book")}>
                         <span>Go Back</span>
