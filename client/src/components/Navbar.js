@@ -6,7 +6,7 @@ import {useNavigate} from 'react-router-dom';
 import {useGlobalContext} from "./Context..js";
 import './Navbar.css';
 
-function Navbar({username}) {
+function Navbar({username, hideText, showText}) {
     const {setSearchTerm, setResultTitle} = useGlobalContext();
     const searchText = useRef(null);
     // const searchText = useRef('');
@@ -38,6 +38,7 @@ function Navbar({username}) {
 
       const handleSubmit = (e) => {
         e.preventDefault();
+        showText();
         if (searchText.current) {  // Check if the ref is not null
             const tempSearchTerm = searchText.current.value.trim();  // Access the value
             if (tempSearchTerm.replace(/[^\w\s]/gi, "").length === 0) {
@@ -52,19 +53,6 @@ function Navbar({username}) {
         }
     };
     
-      // const handleSubmit = (e) => {
-      //   e.preventDefault();
-      //   let tempSearchTerm = searchText.current.value.trim();
-      //   if ((tempSearchTerm.replace(/[^\w\s]/gi,"")).length === 0){
-      //     setSearchTerm("the lost world");
-      //     setResultTitle("Please Enter Something...");
-      //   } else {
-      //     setSearchTerm(searchText.current.value);
-      //   }
-
-      //   navigate("/book");
-      // };
-    
       useEffect(() => {
         const token = localStorage.getItem("token");
         const authStatus = localStorage.getItem("auth");
@@ -78,9 +66,19 @@ function Navbar({username}) {
 
     const useRname = localStorage.getItem("username");
 
+    const navMyList = () => {
+      hideText();
+      navigate("/myList");
+    };
+    const navHome = () => {
+      showText();
+      navigate("/");
+    };
+
     return (
         <div id = "Navbar">
-            <Button variant="outlined" id="homeButton" onClick={() => navigate("/")}>Go Home</Button>
+            <Button variant="outlined" id="homeButton" onClick={navHome}>Go Home</Button>
+            <Button variant="outlined" id="myListButton" onClick={navMyList}>Go to My List</Button>
             <input type="text" className="search" placeholder="Harry Potter and the..." ref = {searchText} autoComplete="off"></input>
             <Button variant="contained" id="searchButton" onClick={handleSubmit}>
               <FaSearch size={20}/>

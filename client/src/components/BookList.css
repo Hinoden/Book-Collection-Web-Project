@@ -4,7 +4,8 @@
 }
 
 .booklist, .book-details {
-    padding: 3rem 0;
+    /* padding: 3rem 0; */
+    padding: 1rem 0;
 }
 
 .booklist-content-grid {
@@ -30,9 +31,9 @@
     margin: 0 auto;
 }
 
-.book-item-info {
+/* .book-item-info {
     margin-top: 2rem;
-}
+} */
 
 .book-item-info-item.title {
     font-size: 18px; /* Change this to your preferred size */

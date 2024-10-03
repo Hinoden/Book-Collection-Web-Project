@@ -1,7 +1,7 @@
 #logOut{
     position: absolute;
     top: 8%;
-    left: 92%;
+    left: 93%;
     transform: translate(-50%, -50%);
     border-radius: 16px;
     height: 3.5%;
@@ -36,7 +36,16 @@
 #homeButton{
     position: absolute;
     top: 8%;
-    left: 83%;
+    left: 85%;
+    transform: translate(-50%, -50%);
+    border-radius: 16px;
+    height: 3.5%;
+}
+
+#myListButton{
+    position: absolute;
+    top: 8%;
+    left: 76%;
     transform: translate(-50%, -50%);
     border-radius: 16px;
     height: 3.5%;

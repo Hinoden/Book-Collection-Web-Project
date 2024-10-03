@@ -6,6 +6,11 @@ import SignUp from "./components/SignUp.js";
 import Home from "./components/Home.js";
 import BookList from "./components/BookList.js";
 import BookDetails from "./components/BookDetails.js";
+import MyList from "./components/MyList.js";
+import CurrReadPage from "./components/CurrRead.js";
+import ReadPage from "./components/Read.js";
+import DroppedPage from "./components/Dropped.js";
+import WishlistPage from "./components/Wishlist.js";
 import {AppProvider} from "./components/Context..js";
 import './App.css';
 
@@ -37,14 +42,22 @@ function App() {
     <AppProvider>
     <div className="App">
       {auth ? (
+        <div className="content">
           <BrowserRouter>
             <Routes>
                 <Route path="/" element={<Home/>}>
                   <Route path="/book" element={<BookList />} />
                   <Route path="/book/:id" element={<BookDetails />} />
+                  <Route path="/myList" element={<MyList />}>
+                    <Route path="/myList/currRead" element={<CurrReadPage />} />
+                    <Route path="/myList/read" element={<ReadPage />} />
+                    <Route path="/myList/dropped" element={<DroppedPage />} />
+                    <Route path="/myList/wishlist" element={<WishlistPage />} />
+                  </Route>
                 </Route>
             </Routes>
           </BrowserRouter>
+        </div>
       ) : (
         <>
       {myBool ? (
