@@ -3,6 +3,8 @@ import {useGlobalContext} from "./Context..js";
 import Book from './Book.js';
 import './Wishlist.css';
 
+
+
 const WishlistPage = () => {
     const {books, wishlisted} = useGlobalContext();
     const wishlistedChecker = (id) => {

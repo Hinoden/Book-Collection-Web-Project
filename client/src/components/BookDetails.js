@@ -9,26 +9,49 @@ import './BookDetails.css';
 const URL = "https://openlibrary.org/works/";
 
 const BookDetails = () => {
-    const {currRead, addToCurrRead, removeFromCurrRead, read, addToRead, removeFromRead, dropped, addToDropped, removeFromDropped, wishlisted, addToWishlist, removeFromWishlist} = useGlobalContext();
+    const {userId, currRead, addToCurrRead, removeFromCurrRead, read, addToRead, removeFromRead, dropped, addToDropped, removeFromDropped, wishlisted, addToWishlist, removeFromWishlist} = useGlobalContext();
     const {id} = useParams();
     const [loading, setLoading] = useState(false);
     const [book, setBook] = useState(null);
+    const [isRead, setIsRead] = useState(false);
+    const [isCurrRead, setIsCurrRead] = useState(false);
+    const [isDrop, setIsDrop] = useState(false);
     const navigate = useNavigate();
 
-    const currReadChecker = (id) => {
-        const booleanCurr = currRead.some((book) => book.id === id);
-        return booleanCurr;
+    const readChecker = async() => {
+        try {
+            const response = await fetch(`http://localhost:3500/api/checkRead/${userId}/${id}`);
+            const data = await response.json();
+            setIsRead(data.isRead);
+        } catch (error) {
+            console.error('Error checking read status:', error);
+        }
+    };
+
+    const currReadChecker = async() => {
+        try {
+            const response = await fetch(`http://localhost:3500/api/checkCurrRead/${userId}/${id}`);
+            const data = await response.json();
+            setIsCurrRead(data.isCurrRead);
+        } catch (error) {
+            console.error('Error checking currRead status: ', error);
+        }
+    };
+
+    const droppedChecker = async() => {
+        try {
+            const response = await fetch(`http://localhost:3500/api/checkDroppedBooks/${userId}/${id}`);
+            const data = await response.json();
+            setIsDrop(data.isDrop);
+        } catch (error) {
+            console.error('Error checking drop status: ', error);
+        }
     }
 
-    const readChecker = (id) => {
-        const booleanRead = read.some((book) => book.id === id);
-        return booleanRead;
-    }
-
-    const droppedChecker = (id) => {
-        const booleanDropped = dropped.some((book) => book.id === id);
-        return booleanDropped;
-    }
+    // const droppedChecker = (id) => {
+    //     const booleanDropped = dropped.some((book) => book.id === id);
+    //     return booleanDropped;
+    // }
 
     const wishlistChecker = (id) => {
         const booleanWishlist = wishlisted.some((book) => book.id === id);
@@ -37,11 +60,10 @@ const BookDetails = () => {
 
     useEffect(() => {
         setLoading(true);
-        async function getBookDetails(){
+        const getBookDetails = async () => {
             try{
                 const response = await fetch(`${URL}${id}.json`);
                 const data = await response.json();
-                console.log(data);
 
                 if (data){
                     const {description, title, covers, subject_places, subject_times, subject} = data;
@@ -55,6 +77,9 @@ const BookDetails = () => {
                         subject: subject ? subject.join(", ") : "No subjects found"
                     };
                     setBook(newBook);
+                    await readChecker();
+                    await currReadChecker();
+                    await droppedChecker();
                 } else {
                     setBook(null);
                 }
@@ -98,33 +123,51 @@ const BookDetails = () => {
                         <span>{book?.subject}</span>
                     </div>
                     <div className="buttonContainer1">
-                        {book && readChecker(book.id) ? (
-                            <Button variant="outlined" className="generalButton" onClick = {() => removeFromRead(book.id)}>
+                        {book && isRead ? (
+                            <Button variant="outlined" className="generalButton" onClick = {() => {
+                                removeFromRead(book.id);
+                                setIsRead(false);
+                            }}>
                                 <span>Remove Read</span>
                             </Button>
                         ) : (
-                            <Button variant="outlined" className="generalButton" onClick = {() => addToRead(book)}>
+                            <Button variant="outlined" className="generalButton" onClick = {() => {
+                                addToRead(book);
+                                setIsRead(true);
+                            }}>
                                 <span>Read</span>
                             </Button>
                         )}
-                        {book && currReadChecker(book.id) ? (
-                            <Button variant="outlined" className="generalButton" onClick = {() => removeFromCurrRead(book.id)}>
+                        {book && isCurrRead ? (
+                            <Button variant="outlined" className="generalButton" onClick = {() => {
+                                removeFromCurrRead(book.id);
+                                setIsCurrRead(false);
+                            }}>
                                 <span>Remove Currently Reading</span>
                             </Button>
                         ) : (
                             book && (
-                                <Button variant="outlined" className="generalButton" onClick = {() => addToCurrRead(book)}>
+                                <Button variant="outlined" className="generalButton" onClick = {() => {
+                                    addToCurrRead(book);
+                                    setIsCurrRead(true);
+                                }}>
                                     <span>Currently Reading</span>
                                 </Button>
                             )
                         )}
-                        {book && droppedChecker(book.id) ? (
-                            <Button variant="outlined" className="generalButton" onClick = {() => removeFromDropped(book.id)}>
+                        {book && isDrop ? (
+                            <Button variant="outlined" className="generalButton" onClick = {() => {
+                                removeFromDropped(book.id);
+                                setIsDrop(false);
+                            }}>
                                 <span>Remove Dropped</span>
                             </Button>
                         ) : (
                             book && (
-                                <Button variant="outlined" className="generalButton" onClick = {() => addToDropped(book)}>
+                                <Button variant="outlined" className="generalButton" onClick = {() => {
+                                    addToDropped(book);
+                                    setIsDrop(true);
+                                }}>
                                     <span>Dropped</span>
                                 </Button>
                             )

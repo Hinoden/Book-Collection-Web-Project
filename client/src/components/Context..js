@@ -1,5 +1,5 @@
-import React, {useState, useContext, useEffect} from 'react';
-import {useCallback} from 'react';
+import React, {useState, useContext, useEffect, useCallback} from 'react';
+import axios from 'axios';
 
 const URL = "https://openlibrary.org/search.json?title=";
 const AppContext = React.createContext();
@@ -13,6 +13,9 @@ const AppProvider = ({children}) => {
     const [read, setRead] = useState([]);
     const [dropped, setDropped] = useState([]);
     const [wishlisted, setWishlisted] = useState([]);
+
+    const userId = localStorage.getItem("userId");
+    console.log("Context: userId: ", userId);
 
     const fetchBooks = useCallback(async() => {
         setLoading(true);
@@ -54,61 +57,123 @@ const AppProvider = ({children}) => {
         }
     }, [searchTerm]);
 
-    const addToCurrRead = (book) => {
-        const oldCurrRead = [...currRead];
-        const newCurrRead = oldCurrRead.concat(book);
-
-        setCurrRead(newCurrRead);
+    const addToCurrRead = async(book) => {
+        try {
+            await axios.post("http://localhost:3500/api/currRead", {
+                userId: userId,
+                book
+            });
+            setCurrRead(prevCurrRead => [...prevCurrRead, book]);
+        } catch (error) {
+            console.error("Error adding book to Current Read List: ", error);
+        }
     };
 
-    const removeFromCurrRead = (id) => {
-        const oldCurrRead = [...currRead];
-        const newCurrRead = oldCurrRead.filter((book) => book.id !== id);
-
-        setCurrRead(newCurrRead);
+    const removeFromCurrRead = async(id) => {
+        try {
+            await axios.delete("http://localhost:3500/api/currRead", {
+                data: {
+                    userId: userId,
+                    book: {id: id}
+                }
+            });
+            setCurrRead(prevCurrRead => prevCurrRead.filter(book => book.id !== id));
+        } catch (error) {
+            console.error("Error removing book from Current Read List: ", error);
+        }
     };
 
-    const addToRead = (book) => {
-        const oldRead = [...read];
-        const newRead = oldRead.concat(book);
-
-        setRead(newRead);
+    const addToRead = async(book) => {
+        try {
+            await axios.post("http://localhost:3500/api/read", {
+                userId: userId,
+                book
+            });
+            setRead(prevRead => [...prevRead, book]);
+        } catch (error) {
+            console.error("Error adding book to Read List: ", error);
+        }
     };
 
-    const removeFromRead = (id) => {
-        const oldRead = [...read];
-        const newRead = oldRead.filter((book) => book.id !== id);
-
-        setRead(newRead);
+    const removeFromRead = async(id) => {
+        try {
+            await axios.delete("http://localhost:3500/api/read", {
+                data: {
+                    userId: userId,
+                    book: {id: id}
+                }
+            });
+            setRead(prevRead => prevRead.filter(book => book.id !== id));
+        } catch (error) {
+            console.error("Error removing book from Read List: ", error);
+        }
     };
 
-    const addToDropped = (book) => {
-        const oldDroppedRead = [...dropped];
-        const newDroppedRead = oldDroppedRead.concat(book);
-
-        setDropped(newDroppedRead);
+    const addToDropped = async(book) => {
+        try {
+            await axios.post("http://localhost:3500/api/droppedBooks", {
+                userId: userId,
+                book
+            });
+            setDropped(prevDropped => [...prevDropped, book]);
+        } catch (error) {
+            console.error("Error adding book to Dropped Read List: ", error);
+        }
     };
 
-    const removeFromDropped = (id) => {
-        const oldDroppedRead = [...dropped];
-        const newDroppedRead = oldDroppedRead.filter((book) => book.id !== id);
-
-        setDropped(newDroppedRead);
+    const removeFromDropped = async(id) => {
+        try {
+            await axios.delete("http://localhost:3500/api/droppedBooks", {
+                data: {
+                    userId: userId,
+                    book: {id: id}
+                }
+            });
+            setDropped(prevDropped => prevDropped.filter(book => book.id !== id));
+        } catch (error) {
+            console.error("Error removing book from Dropped Read List: ", error);
+        }
     };
 
-    const addToWishlist = (book) => {
-        const oldWishlistRead = [...wishlisted];
-        const newWishlistRead = oldWishlistRead.concat(book);
-
-        setWishlisted(newWishlistRead);
+    const addToWishlist = async(book) => {
+        try {
+            await axios.post("http://localhost:3500/api/wishlistBooks", {
+                userId: userId,
+                book
+            });
+            setWishlisted(prevWishlisted => [...prevWishlisted, book]);
+        } catch (error) {
+            console.error("Error adding book to Wishlist: ", error);
+        }
     };
 
-    const removeFromWishlist = (id) => {
-        const oldWishlistRead = [...wishlisted];
-        const newWishlistRead = oldWishlistRead.filter((book) => book.id !== id);
-
-        setWishlisted(newWishlistRead);
+    const removeFromWishlist = async(id) => {
+        try {
+            await axios.delete("http://localhost:3500/api/wishlistBooks", {
+                data: {
+                    userId: userId,
+                    book: {id: id}
+                }
+            });
+            setWishlisted(prevWishlisted => prevWishlisted.filter(book => book.id !== id));
+        } catch (error) {
+            console.error("Error removing book from Wishlist: ", error);
+        }
     };
+
+    // const addToWishlist = (book) => {
+    //     const oldWishlistRead = [...wishlisted];
+    //     const newWishlistRead = oldWishlistRead.concat(book);
+
+    //     setWishlisted(newWishlistRead);
+    // };
+
+    // const removeFromWishlist = (id) => {
+    //     const oldWishlistRead = [...wishlisted];
+    //     const newWishlistRead = oldWishlistRead.filter((book) => book.id !== id);
+
+    //     setWishlisted(newWishlistRead);
+    // };
 
     useEffect(() => {
         fetchBooks();
@@ -116,7 +181,7 @@ const AppProvider = ({children}) => {
 
     return(
         <AppContext.Provider value = {{
-            currRead, addToCurrRead, removeFromCurrRead, read, addToRead, removeFromRead, dropped, addToDropped, removeFromDropped, wishlisted, addToWishlist, removeFromWishlist, loading, books, setSearchTerm, resultTitle, setResultTitle
+            userId, currRead, addToCurrRead, removeFromCurrRead, read, addToRead, removeFromRead, dropped, addToDropped, removeFromDropped, wishlisted, addToWishlist, removeFromWishlist, loading, books, setSearchTerm, resultTitle, setResultTitle
         }}>
             {children}
         </AppContext.Provider>
