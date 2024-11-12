@@ -3,17 +3,18 @@
     position: absolute;
     top: 28%;
     left: 50%;
-    width: 100%;
+    width: 1300px;
     height: 20%;
     transform: translate(-50%, -50%);
     padding-bottom: 20px;
     z-index: 1;
+    border-radius: 10px;
 }
 
 
 #description{
     margin-left: 10%;
     margin-right: 10%;
-    padding-top: 1%;
+    padding-top: 3%;
     padding-bottom: 1%;
 }
