@@ -44,7 +44,10 @@ const CurrReadPage = () => {
                     </div>
                 </div>
             ) : (
-                <h1>You don't have any current reads!</h1>
+                <div>
+                    <h1>You don't have any current reads!</h1>
+                    <p>...Are you not reading?</p>
+                </div>
             )}
         </div>
     );
