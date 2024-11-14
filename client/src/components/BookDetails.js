@@ -9,13 +9,14 @@ import './BookDetails.css';
 const URL = "https://openlibrary.org/works/";
 
 const BookDetails = () => {
-    const {userId, currRead, addToCurrRead, removeFromCurrRead, read, addToRead, removeFromRead, dropped, addToDropped, removeFromDropped, wishlisted, addToWishlist, removeFromWishlist} = useGlobalContext();
+    const {userId, addToCurrRead, removeFromCurrRead, addToRead, removeFromRead, addToDropped, removeFromDropped, addToWishlist, removeFromWishlist} = useGlobalContext();
     const {id} = useParams();
     const [loading, setLoading] = useState(false);
     const [book, setBook] = useState(null);
     const [isRead, setIsRead] = useState(false);
     const [isCurrRead, setIsCurrRead] = useState(false);
     const [isDrop, setIsDrop] = useState(false);
+    const [isWish, setIsWish] = useState(false);
     const navigate = useNavigate();
 
     const readChecker = async() => {
@@ -48,15 +49,20 @@ const BookDetails = () => {
         }
     }
 
-    // const droppedChecker = (id) => {
-    //     const booleanDropped = dropped.some((book) => book.id === id);
-    //     return booleanDropped;
-    // }
-
-    const wishlistChecker = (id) => {
-        const booleanWishlist = wishlisted.some((book) => book.id === id);
-        return booleanWishlist;
+    const wishlistChecker = async() => {
+        try {
+            const response = await fetch(`http://localhost:3500/api/checkWishlistBooks/${userId}/${id}`);
+            const data = await response.json();
+            setIsWish(data.isWish);
+        } catch (error) {
+            console.error('Error checking drop status: ', error);
+        }
     }
+
+    // const wishlistChecker = (id) => {
+    //     const booleanWishlist = wishlisted.some((book) => book.id === id);
+    //     return booleanWishlist;
+    // }
 
     useEffect(() => {
         setLoading(true);
@@ -80,6 +86,7 @@ const BookDetails = () => {
                     await readChecker();
                     await currReadChecker();
                     await droppedChecker();
+                    await wishlistChecker();
                 } else {
                     setBook(null);
                 }
@@ -172,13 +179,19 @@ const BookDetails = () => {
                                 </Button>
                             )
                         )}
-                        {book && wishlistChecker(book.id) ? (
-                            <Button variant="outlined" className="generalButton" onClick = {() => removeFromWishlist(book.id)}>
+                        {book && isWish ? (
+                            <Button variant="outlined" className="generalButton" onClick = {() => {
+                                removeFromWishlist(book.id);
+                                setIsWish(false);
+                            }}>
                                 <span>Remove Wishlist</span>
                             </Button>
                         ) : (
                             book && (
-                                <Button variant="outlined" className="generalButton" onClick = {() => addToWishlist(book)}>
+                                <Button variant="outlined" className="generalButton" onClick = {() => {
+                                    addToWishlist(book);
+                                    setIsWish(true);
+                                }}>
                                     <span>Wishlist</span>
                                 </Button>
                             )

@@ -42,7 +42,10 @@ const ReadPage = () => {
                     </div>
                 </div>
             ) : (
-                <h1>You don't have any reads!</h1>
+                <div className="noList">
+                    <h1>You don't have any reads!</h1>
+                    <p>...You haven't read a single book?</p>
+                </div>
             )}
         </div>
     )

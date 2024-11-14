@@ -42,7 +42,10 @@ const DroppedPage = () => {
                     </div>
                 </div>
             ) : (
-                <h1>You don't have any dropped reads!</h1>
+                <div>
+                    <h1>You don't have any dropped reads!</h1>
+                    <p>Honestly, that's impressive.</p>
+                </div>
             )}
         </div>
     )
