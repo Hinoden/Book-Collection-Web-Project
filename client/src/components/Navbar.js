@@ -11,7 +11,7 @@ function Navbar({username, hideText, showText}) {
     const searchText = useRef(null);
     // const searchText = useRef('');
     const navigate = useNavigate(); 
-    const [currentForm, setCurrentForm] = useState('login');
+    // const [currentForm, setCurrentForm] = useState('login');
     const [auth, setAuth] = useState(false);
 
     const logOut = () => {
@@ -21,7 +21,7 @@ function Navbar({username, hideText, showText}) {
           localStorage.removeItem("token");
           localStorage.removeItem("username");
           localStorage.removeItem("auth");
-          setCurrentForm('login');
+          // setCurrentForm('login');
           document.cookie.split(";").forEach(cookie => {
             const [name] = cookie.split("=");
             document.cookie = `${name.trim()}=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/`;
