@@ -59,18 +59,13 @@ const BookDetails = () => {
         }
     }
 
-    // const wishlistChecker = (id) => {
-    //     const booleanWishlist = wishlisted.some((book) => book.id === id);
-    //     return booleanWishlist;
-    // }
-
     useEffect(() => {
         setLoading(true);
         const getBookDetails = async () => {
             try{
                 const response = await fetch(`${URL}${id}.json`);
                 const data = await response.json();
-
+                console.log("data: ", data);
                 if (data){
                     const {description, title, covers, subject_places, subject_times, subject} = data;
                     const newBook = {

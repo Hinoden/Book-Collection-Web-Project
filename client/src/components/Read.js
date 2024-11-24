@@ -30,23 +30,25 @@ const ReadPage = () => {
         }
     }, [userId]);
     return(
-        <div className = "reads">
-            {loading ? (
-                <h1>Loading...</h1>
-            ) : books.length > 0 ? (
-                <div className = "read-list">
-                    <div className = "booklist-content-grid">
-                        {books.map((book, index) => (
-                            <Book key={index} {...book} />
-                        ))}
+        <div className = "parentContainer">
+            <div className = "reads">
+                {loading ? (
+                    <h1>Loading...</h1>
+                ) : books.length > 0 ? (
+                    <div className = "read-list">
+                        <div className = "booklist-content-grid">
+                            {books.map((book, index) => (
+                                <Book key={index} {...book} />
+                            ))}
+                        </div>
                     </div>
-                </div>
-            ) : (
-                <div className="noList">
-                    <h1>You don't have any reads!</h1>
-                    <p>...You haven't read a single book?</p>
-                </div>
-            )}
+                ) : (
+                    <div className="noReadList">
+                        <h1>You don't have any reads!</h1>
+                        <p>...You haven't read a single book?</p>
+                    </div>
+                )}
+            </div>
         </div>
     )
 }

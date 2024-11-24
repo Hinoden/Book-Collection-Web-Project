@@ -30,25 +30,27 @@ const CurrReadPage = () => {
         }
     }, [userId]);
     return(
-        <div className = 'currReads'>
-            {loading ? (
-                <h1>Loading...</h1>
-            ) : books.length > 0 ? (
-                <div className = 'curr-read-list'>
-                    <div className = 'booklist-content-grid'>
-                        {
-                            books.map((book, index) => (
-                                <Book key={index}{...book} />
-                            ))
-                        }
+        <div className = "parentContainer">
+            <div className = "currReads">
+                {loading ? (
+                    <h1>Loading...</h1>
+                ) : books.length > 0 ? (
+                    <div className = 'curr-read-list'>
+                        <div className = 'booklist-content-grid'>
+                            {
+                                books.map((book, index) => (
+                                    <Book key={index}{...book} />
+                                ))
+                            }
+                        </div>
                     </div>
-                </div>
-            ) : (
-                <div>
-                    <h1>You don't have any current reads!</h1>
-                    <p>...Are you not reading?</p>
-                </div>
-            )}
+                ) : (
+                    <div className="currReadDesc">
+                        <h1>You don't have any current reads!</h1>
+                        <p>C'mon, let's read!</p>
+                    </div>
+                )}
+            </div>
         </div>
     );
 }

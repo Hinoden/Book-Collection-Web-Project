@@ -30,23 +30,25 @@ const DroppedPage = () => {
         }
     }, [userId]);
     return(
-        <div className = "droppeds">
-            {loading ? (
-                <h1>Loading...</h1>
-            ) : books.length > 0 ? (
-                <div className = "dropped-list">
-                    <div className = "booklist-content-grid">
-                        {books.map((book, index) => (
-                            <Book key={index} {...book} />
-                        ))}
+        <div className = "parentContainer">
+            <div className = "droppeds">
+                {loading ? (
+                    <h1>Loading...</h1>
+                ) : books.length > 0 ? (
+                    <div className = "dropped-list">
+                        <div className = "booklist-content-grid">
+                            {books.map((book, index) => (
+                                <Book key={index} {...book} />
+                            ))}
+                        </div>
                     </div>
-                </div>
-            ) : (
-                <div>
-                    <h1>You don't have any dropped reads!</h1>
-                    <p>Honestly, that's impressive.</p>
-                </div>
-            )}
+                ) : (
+                    <div>
+                        <h1>You don't have any dropped reads!</h1>
+                        <p>Honestly, that's impressive.</p>
+                    </div>
+                )}
+            </div>
         </div>
     )
 }
