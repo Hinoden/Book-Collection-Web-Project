@@ -30,23 +30,25 @@ const WishlistPage = () => {
         }
     }, [userId]);
     return(
-        <div className = "wishlists">
-            {loading ? (
-                <h1>Loading...</h1>
-            ) : books.length > 0 ? (
-                <div className = "wishlist-list">
-                    <div className = "booklist-content-grid">
-                        {books.map((book, index) => (
-                            <Book key={index} {...book} />
-                        ))}
+        <div className="parentContainer">
+            <div className = "wishlists">
+                {loading ? (
+                    <h1>Loading...</h1>
+                ) : books.length > 0 ? (
+                    <div className = "wishlist-list">
+                        <div className = "booklist-content-grid">
+                            {books.map((book, index) => (
+                                <Book key={index} {...book} />
+                            ))}
+                        </div>
                     </div>
-                </div>
-            ) : (
-                <div>
-                    <h1>You don't have any wishlisted reads!</h1>
-                    <p>Come on, there has to be at least one book you want.</p>
-                </div>
-            )}
+                ) : (
+                    <div>
+                        <h1>You don't have any wishlisted reads!</h1>
+                        <p>Come on, there has to be at least one book you want.</p>
+                    </div>
+                )}
+            </div>
         </div>
     )
 }

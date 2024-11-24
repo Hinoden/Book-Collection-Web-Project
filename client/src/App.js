@@ -39,8 +39,8 @@ function App() {
   }, []);
 
   return (
+    <div className = "App">
     <AppProvider>
-    <div className="App">
       {auth ? (
         <div className="content">
           <BrowserRouter>
@@ -71,8 +71,8 @@ function App() {
       )}
       </>
       )}
-    </div>
     </AppProvider>
+    </div>
   );
 }
 

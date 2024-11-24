@@ -24,11 +24,11 @@ const MyList = () => {
     };
 
     return (
-        <div>
+        <div className = "container">
             <div className="myListContainer">
-                <div className="listHeader">
+                {/* <div className="listHeader">
                     <h1>My Lists</h1>
-                </div>
+                </div> */}
                 <div className="buttonContainer">
                     <Button
                         variant="outlined"

@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useCallback} from 'react';
 import {useParams} from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import {useGlobalContext} from "./Context..js";
@@ -19,7 +19,7 @@ const BookDetails = () => {
     const [isWish, setIsWish] = useState(false);
     const navigate = useNavigate();
 
-    const readChecker = async() => {
+    const readChecker = useCallback(async() => {
         try {
             const response = await fetch(`http://localhost:3500/api/checkRead/${userId}/${id}`);
             const data = await response.json();
@@ -27,9 +27,9 @@ const BookDetails = () => {
         } catch (error) {
             console.error('Error checking read status:', error);
         }
-    };
+    }, [userId, id]);
 
-    const currReadChecker = async() => {
+    const currReadChecker = useCallback(async() => {
         try {
             const response = await fetch(`http://localhost:3500/api/checkCurrRead/${userId}/${id}`);
             const data = await response.json();
@@ -37,9 +37,9 @@ const BookDetails = () => {
         } catch (error) {
             console.error('Error checking currRead status: ', error);
         }
-    };
+    }, [userId, id]);
 
-    const droppedChecker = async() => {
+    const droppedChecker = useCallback(async() => {
         try {
             const response = await fetch(`http://localhost:3500/api/checkDroppedBooks/${userId}/${id}`);
             const data = await response.json();
@@ -47,9 +47,9 @@ const BookDetails = () => {
         } catch (error) {
             console.error('Error checking drop status: ', error);
         }
-    }
+    }, [userId, id]);
 
-    const wishlistChecker = async() => {
+    const wishlistChecker = useCallback(async() => {
         try {
             const response = await fetch(`http://localhost:3500/api/checkWishlistBooks/${userId}/${id}`);
             const data = await response.json();
@@ -57,12 +57,7 @@ const BookDetails = () => {
         } catch (error) {
             console.error('Error checking drop status: ', error);
         }
-    }
-
-    // const wishlistChecker = (id) => {
-    //     const booleanWishlist = wishlisted.some((book) => book.id === id);
-    //     return booleanWishlist;
-    // }
+    }, [userId, id]);
 
     useEffect(() => {
         setLoading(true);
@@ -70,7 +65,7 @@ const BookDetails = () => {
             try{
                 const response = await fetch(`${URL}${id}.json`);
                 const data = await response.json();
-
+                console.log("data: ", data);
                 if (data){
                     const {description, title, covers, subject_places, subject_times, subject} = data;
                     const newBook = {
@@ -97,7 +92,7 @@ const BookDetails = () => {
             }
         }
         getBookDetails();
-    }, [id]);
+    }, [id, readChecker, currReadChecker, droppedChecker, wishlistChecker]);
 
     if (loading) {
         return <div>Loading Books...</div>
