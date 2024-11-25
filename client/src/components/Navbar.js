@@ -27,6 +27,7 @@ function Navbar({username, hideText, showText}) {
             const [name] = cookie.split("=");
             document.cookie = `${name.trim()}=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/`;
           });
+          navigate('/');
           console.log(response.data.message);
           window.location.reload();
         })
