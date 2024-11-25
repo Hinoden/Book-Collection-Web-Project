@@ -1,6 +1,5 @@
 import React, {useState, useEffect, useCallback} from 'react';
-import {useParams} from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams, useOutletContext } from 'react-router-dom';
 import {useGlobalContext} from "./Context..js";
 import coverImg from "../cover_not_found.jpg";
 import Button from '@mui/material/Button';
@@ -17,7 +16,12 @@ const BookDetails = () => {
     const [isCurrRead, setIsCurrRead] = useState(false);
     const [isDrop, setIsDrop] = useState(false);
     const [isWish, setIsWish] = useState(false);
+    const {showText} = useOutletContext();
     const navigate = useNavigate();
+
+    useEffect(() => {
+        showText();
+    }, [showText]);
 
     const readChecker = useCallback(async() => {
         try {
@@ -192,7 +196,7 @@ const BookDetails = () => {
                             )
                         )}
                     </div>
-                    <Button variant="contained" className="backButton" onClick={() => navigate("/book")}>
+                    <Button variant="contained" className="backButton" onClick={() => navigate(-1)}>
                         <span>Go Back</span>
                     </Button>
                 </div>
