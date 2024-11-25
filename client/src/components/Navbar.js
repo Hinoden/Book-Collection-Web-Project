@@ -21,6 +21,7 @@ function Navbar({username, hideText, showText}) {
           localStorage.removeItem("token");
           localStorage.removeItem("username");
           localStorage.removeItem("auth");
+          localStorage.removeItem("userId");
           // setCurrentForm('login');
           document.cookie.split(";").forEach(cookie => {
             const [name] = cookie.split("=");
