@@ -31,6 +31,8 @@ function Login(props) {
         axios.post(LOGIN_URL, {
             username: username,
             password: password,
+        }, {
+            headers: { 'Content-Type': 'application/json' }
         }).then((response) => {
             if (!response.data.auth){
                 // setLoginStatus(false);
