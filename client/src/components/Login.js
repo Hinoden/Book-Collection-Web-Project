@@ -32,7 +32,7 @@ function Login(props) {
             password: password,
         }, {
             headers: { 'Content-Type': 'application/json' }
-        ).then((response) => {
+        }).then((response) => {
             if (!response.data.auth){
                 // setLoginStatus(false);
                 setLoginMSG(response.data.message);
