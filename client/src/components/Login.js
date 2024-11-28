@@ -32,7 +32,8 @@ function Login(props) {
             username: username,
             password: password,
         }, {
-            headers: { 'Content-Type': 'application/json' }
+            headers: { 'Content-Type': 'application/json' },
+            withCredentials: true,
         }).then((response) => {
             if (!response.data.auth){
                 // setLoginStatus(false);
