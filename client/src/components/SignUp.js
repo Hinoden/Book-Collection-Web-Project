@@ -7,7 +7,7 @@ import './SignUp.css';
 const USER_REGEX = /^[a-zA-Z][a-zA-Z0-9-_]{3,23}$/;     //username must start with a lower or uppercase letter, then followed by lower/uppercase, "-", "_", or 0-9, and have 3-23 characters
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;        //password requires one lowercase letter, one uppercase letter, one digit, and one special character and have 8-24 characters
 // const REGISTER_URL = 'http://localhost:3500/register';
-const REGISTER_URL = 'https://book-collection-web-project-api.vercel.app/register';
+const REGISTER_URL = `${process.env.REACT_APP_API_URL}/register`;
 
 function SignUp(props) {
     const userRef = useRef();

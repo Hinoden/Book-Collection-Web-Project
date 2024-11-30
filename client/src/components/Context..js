@@ -59,7 +59,7 @@ const AppProvider = ({children}) => {
 
     const addToCurrRead = async(book) => {
         try {
-            await axios.post("http://localhost:3500/api/currRead", {
+            await axios.post(`${process.env.REACT_APP_API_URL}/currRead`, {
                 userId: userId,
                 book
             });
@@ -71,7 +71,7 @@ const AppProvider = ({children}) => {
 
     const removeFromCurrRead = async(id) => {
         try {
-            await axios.delete("http://localhost:3500/api/currRead", {
+            await axios.delete(`${process.env.REACT_APP_API_URL}/currRead`, {
                 data: {
                     userId: userId,
                     book: {id: id}
@@ -85,7 +85,7 @@ const AppProvider = ({children}) => {
 
     const addToRead = async(book) => {
         try {
-            await axios.post("http://localhost:3500/api/read", {
+            await axios.post(`${process.env.REACT_APP_API_URL}/read`, {
                 userId: userId,
                 book
             });
@@ -97,7 +97,7 @@ const AppProvider = ({children}) => {
 
     const removeFromRead = async(id) => {
         try {
-            await axios.delete("http://localhost:3500/api/read", {
+            await axios.delete(`${process.env.REACT_APP_API_URL}/api/read`, {
                 data: {
                     userId: userId,
                     book: {id: id}
@@ -111,7 +111,7 @@ const AppProvider = ({children}) => {
 
     const addToDropped = async(book) => {
         try {
-            await axios.post("http://localhost:3500/api/droppedBooks", {
+            await axios.post(`${process.env.REACT_APP_API_URL}/api/droppedBooks`, {
                 userId: userId,
                 book
             });
@@ -123,7 +123,7 @@ const AppProvider = ({children}) => {
 
     const removeFromDropped = async(id) => {
         try {
-            await axios.delete("http://localhost:3500/api/droppedBooks", {
+            await axios.delete(`${process.env.REACT_APP_API_URL}/droppedBooks`, {
                 data: {
                     userId: userId,
                     book: {id: id}
@@ -137,7 +137,7 @@ const AppProvider = ({children}) => {
 
     const addToWishlist = async(book) => {
         try {
-            await axios.post("http://localhost:3500/api/wishlistBooks", {
+            await axios.post(`${process.env.REACT_APP_API_URL}/wishlistBooks`, {
                 userId: userId,
                 book
             });
@@ -149,7 +149,7 @@ const AppProvider = ({children}) => {
 
     const removeFromWishlist = async(id) => {
         try {
-            await axios.delete("http://localhost:3500/api/wishlistBooks", {
+            await axios.delete(`${process.env.REACT_APP_API_URL}/wishlistBooks`, {
                 data: {
                     userId: userId,
                     book: {id: id}

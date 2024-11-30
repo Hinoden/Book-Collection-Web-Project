@@ -11,7 +11,7 @@ const WishlistPage = () => {
     useEffect(() => {
         const fetchBooks = async() => {
             try {
-                const response = await fetch(`http://localhost:3500/api/wishlistBooks/${userId}`);
+                const response = await fetch(`${process.env.REACT_APP_API_URL}/wishlistBooks/${userId}`);
                 if (response.ok) {
                     const data = await response.json();
                     setBooks(data);

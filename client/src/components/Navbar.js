@@ -15,7 +15,7 @@ function Navbar({username, hideText, showText}) {
     const [auth, setAuth] = useState(false);
 
     const logOut = () => {
-        axios.post("http://localhost:3500/logout")
+        axios.post(`${process.env.REACT_APP_API_URL}/logout`)
         .then(response => {
           setAuth(false);
           localStorage.removeItem("token");

@@ -11,7 +11,7 @@ const ReadPage = () => {
     useEffect(() => {
         const fetchBooks = async() => {
             try {
-                const response = await fetch(`http://localhost:3500/api/read/${userId}`);
+                const response = await fetch(`${process.env.REACT_APP_API_URL}/read/${userId}`);
                 if (response.ok) {
                     const data = await response.json();
                     setBooks(data);

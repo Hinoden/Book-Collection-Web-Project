@@ -25,7 +25,7 @@ const BookDetails = () => {
 
     const readChecker = useCallback(async() => {
         try {
-            const response = await fetch(`http://localhost:3500/api/checkRead/${userId}/${id}`);
+            const response = await fetch(`${process.env.REACT_APP_API_URL}/checkRead/${userId}/${id}`);
             const data = await response.json();
             setIsRead(data.isRead);
         } catch (error) {
@@ -35,7 +35,7 @@ const BookDetails = () => {
 
     const currReadChecker = useCallback(async() => {
         try {
-            const response = await fetch(`http://localhost:3500/api/checkCurrRead/${userId}/${id}`);
+            const response = await fetch(`${process.env.REACT_APP_API_URL}/checkCurrRead/${userId}/${id}`);
             const data = await response.json();
             setIsCurrRead(data.isCurrRead);
         } catch (error) {
@@ -45,7 +45,7 @@ const BookDetails = () => {
 
     const droppedChecker = useCallback(async() => {
         try {
-            const response = await fetch(`http://localhost:3500/api/checkDroppedBooks/${userId}/${id}`);
+            const response = await fetch(`${process.env.REACT_APP_API_URL}/checkDroppedBooks/${userId}/${id}`);
             const data = await response.json();
             setIsDrop(data.isDrop);
         } catch (error) {
@@ -55,7 +55,7 @@ const BookDetails = () => {
 
     const wishlistChecker = useCallback(async() => {
         try {
-            const response = await fetch(`http://localhost:3500/api/checkWishlistBooks/${userId}/${id}`);
+            const response = await fetch(`${process.env.REACT_APP_API_URL}/checkWishlistBooks/${userId}/${id}`);
             const data = await response.json();
             setIsWish(data.isWish);
         } catch (error) {
