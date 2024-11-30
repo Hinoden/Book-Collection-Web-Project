@@ -11,7 +11,7 @@ const CurrReadPage = () => {
     useEffect(() => {
         const fetchBooks = async() => {
             try {
-                const response = await fetch(`http://localhost:3500/api/currRead/${userId}`);
+                const response = await fetch(`${process.env.REACT_APP_API_URL}/currRead/${userId}`);
                 if (response.ok) {
                     const data = await response.json();
                     setBooks(data);

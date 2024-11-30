@@ -80,10 +80,10 @@ function Navbar({username, hideText, showText}) {
     return (
         <div id = "navbar">
             <p id="welcome">Welcome {useRname}</p>
-            <input type="text" className="search" placeholder="Harry Potter and the..." ref = {searchText} autoComplete="off"></input>
-            <Button variant="contained" id="searchButton" onClick={handleSubmit}>
-              <FaSearch size={20}/>
-            </Button>
+              <input type="text" className="search" placeholder="Harry Potter and the..." ref = {searchText} autoComplete="off"></input>
+              <Button variant="contained" id="searchButton" onClick={handleSubmit}>
+                <FaSearch size={20}/>
+              </Button>
             <Button variant="outlined" id="homeButton" onClick={navHome}>Go Home</Button>
             <Button variant="outlined" id="myListButton" onClick={navMyList}>Go to My List</Button>
             <Button variant="contained" id="logOut" onClick={logOut}>Log Out</Button>
