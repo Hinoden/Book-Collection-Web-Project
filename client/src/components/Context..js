@@ -97,7 +97,7 @@ const AppProvider = ({children}) => {
 
     const removeFromRead = async(id) => {
         try {
-            await axios.delete(`${process.env.REACT_APP_API_URL}/api/read`, {
+            await axios.delete(`${process.env.REACT_APP_API_URL}/read`, {
                 data: {
                     userId: userId,
                     book: {id: id}
@@ -111,7 +111,7 @@ const AppProvider = ({children}) => {
 
     const addToDropped = async(book) => {
         try {
-            await axios.post(`${process.env.REACT_APP_API_URL}/api/droppedBooks`, {
+            await axios.post(`${process.env.REACT_APP_API_URL}/droppedBooks`, {
                 userId: userId,
                 book
             });
