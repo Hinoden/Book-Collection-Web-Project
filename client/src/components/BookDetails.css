@@ -19,6 +19,7 @@
 .book_details {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     align-items: flex-start; /* Align items at the top */
     gap: 20px; /* Add spacing between the elements */
     margin-top: 500px;
@@ -33,7 +34,7 @@
     /* Additional styling for the text if needed */
     flex: 1;
     margin-left: 20px;
-    padding-right: 100px;
+    /* padding-right: 100px; */
     text-align: left;
 }
 
