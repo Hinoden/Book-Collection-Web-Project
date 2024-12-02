@@ -1,0 +1,11 @@
+.parentContainer {
+    display: block; /* Change to block layout */
+    position: relative;
+    width: 100%;
+    height: auto;
+}
+
+.wishlists{
+    width: 1300px;
+    margin-top: 10px;
+}

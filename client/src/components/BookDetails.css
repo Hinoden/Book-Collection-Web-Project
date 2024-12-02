@@ -1,0 +1,80 @@
+.book_cover img{
+    width: 300px;
+    height: auto;
+    max-width: 100%;
+    padding-left: 20px;
+}
+
+.buttonContainer1 {
+    display: flex;
+    gap: 15px;
+    margin-top: 15px;
+    margin-bottom: 20px;
+}
+
+.book_description {
+    padding: 10px;
+}
+
+.book_details {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-start; /* Align items at the top */
+    gap: 20px; /* Add spacing between the elements */
+    margin-top: 500px;
+    padding: 50px;
+    width: auto;
+    height: auto;
+    background-color: rgb(253, 247, 231);
+    border-radius: 25px;
+}
+
+.book_info {
+    /* Additional styling for the text if needed */
+    flex: 1;
+    margin-left: 20px;
+    /* padding-right: 100px; */
+    text-align: left;
+}
+
+.subjects {
+    padding: 10px;
+}
+
+.book_subject_places {
+    padding: 10px;
+}
+
+.book_subject_times {
+    padding: 10px;
+}
+
+.book_title {
+    font-weight: bold;
+    font-size: 40px;
+}
+
+.back_button {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#bold {
+    font-weight: bold;
+}
+
+@media screen and (max-width: 800px) {
+    .book_details {
+        flex-direction: column;
+        align-items: center;
+    }
+    .book_cover {
+        margin-top: 400px;
+    }
+}
+
+@media screen and (max-width: 1390px) {
+}

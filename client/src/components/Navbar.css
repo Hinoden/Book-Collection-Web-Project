@@ -1,0 +1,94 @@
+#welcome{
+    white-space: nowrap;
+    font-weight: bold;
+    padding-left: 60px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 20px;
+    margin-top: 10px;
+}
+
+#navbar{
+    position: fixed;
+    display: flex;
+    flex-wrap: wrap;
+    top: 0;
+    left: 0;
+    background-color: pink;
+    width: 100%;
+    height: auto;
+    padding: 10px;
+    z-index: 10;
+}
+
+.search{
+    margin-top: 5px;
+    margin-left: 120px;
+    height: 26px;
+    margin-right: 5px;
+    min-width: 40%;
+    border-radius: 16px;
+}
+
+#searchButton{
+    margin-top: 5px;
+    margin-right: 14px;
+    border-radius: 16px;
+    height: 30px;
+}
+
+#homeButton{
+    margin-top: 5px;
+    margin-right: 10px;
+    border-radius: 16px;
+    height: 30px;
+}
+
+#myListButton{
+    margin-top: 5px;
+    margin-right: 10px;
+    border-radius: 16px;
+    height: 30px;
+}
+
+#logOut{
+    margin-top: 5px;
+    border-radius: 16px;
+    height: 30px;
+}
+
+@media screen and (max-width: 800px) {
+    #welcome {
+        padding-left: 10px;
+        font-size: 18px;
+    }
+    .search {
+        margin-left: 10px;
+    }
+    #homeButton {
+        flex-basis: auto;
+        margin: 0 auto;
+    }
+    #myListButton {
+        flex-basis: auto;
+        margin: 0 auto;
+    }
+    #logOut {
+        flex-basis: auto;
+        margin: 0 auto;
+    }
+}
+
+@media screen and (max-width: 992px) {
+    #homeButton {
+        flex-basis: auto;
+        margin: 0 auto;
+    }
+    #myListButton {
+        flex-basis: auto;
+        margin: 0 auto;
+    }
+    #logOut {
+        flex-basis: auto;
+        margin: 0 auto;
+    }
+}

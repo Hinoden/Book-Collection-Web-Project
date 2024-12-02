@@ -1,0 +1,72 @@
+body{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: linear-gradient(79deg, #C3E5F1, #FFFBDB 48%, #FFE0F9);
+}
+
+.header1{
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+}
+
+.last{
+    position: absolute;
+    top: 80%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+}
+
+.loginContainer{
+    position: absolute;
+    box-shadow: 5px 5px 10px 2px rgba(187, 186, 186, 0.8);
+    width: 450px;
+    height: 550px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 10px;
+    background-color: white;
+}
+
+.passLogin{
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+}
+
+.registerButton{
+    position: absolute;
+    top: 90%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+}
+
+.status{
+    position: absolute;
+    font-size: 90%;
+    color: red;
+    top: 5%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.title1{
+    font-size: 80px;
+    color: rgb(0, 119, 255);
+}
+
+.userLogin{
+    position: absolute;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+}

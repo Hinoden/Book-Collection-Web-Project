@@ -1,0 +1,30 @@
+.header{
+    background-color: white;
+    position: absolute;
+    top: 28%;
+    left: 50%;
+    width: 90%;
+    height: auto;
+    transform: translate(-50%, -50%);
+    padding-bottom: 20px;
+    z-index: 1;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+
+#description{
+    margin: 0 auto;
+    padding: 1% 0;
+    overflow-wrap: break-word; /* Breaks long words to prevent overflow */
+}
+
+@media screen and (max-width: 800px) {
+    .header {
+        margin-top: 50px;
+    }
+}
+
+@media screen and (max-width: 992px) {
+
+}
